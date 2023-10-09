@@ -1,21 +1,40 @@
-// [Template no Kotlin Playground](https://pl.kotl.in/WcteahpyN)
-
 enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
 
-class Usuario
+class Usuario(val nome: String)
 
 data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
 
 data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
-
     val inscritos = mutableListOf<Usuario>()
-    
+
     fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
+        inscritos.add(usuario)
     }
 }
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    // Cenário de teste: Criando alguns objetos
+    val usuario1 = Usuario("João")
+    val usuario2 = Usuario("Maria")
+
+    val conteudo1 = ConteudoEducacional("HTML", 90)
+    val conteudo2 = ConteudoEducacional("CSS", 60)
+    val conteudo3 = ConteudoEducacional("JavaScript", 120)
+
+    val formacaoWeb = Formacao("Desenvolvimento Web", listOf(conteudo1, conteudo2, conteudo3))
+
+    // Matriculando usuários na formação
+    formacaoWeb.matricular(usuario1)
+    formacaoWeb.matricular(usuario2)
+
+    // Exibindo informações
+    println("Formação: ${formacaoWeb.nome}")
+    println("Conteúdos:")
+    for (conteudo in formacaoWeb.conteudos) {
+        println("${conteudo.nome} - ${conteudo.duracao} minutos")
+    }
+    println("Inscritos:")
+    for (inscrito in formacaoWeb.inscritos) {
+        println(inscrito.nome)
+    }
 }
